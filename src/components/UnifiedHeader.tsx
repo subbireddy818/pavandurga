@@ -95,10 +95,6 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
     }
   }
 
-  const handleSearchClick = () => {
-    setIsSearchOpen(true)
-  }
-
   const handlePlantClick = (plant: Plant) => {
     setIsSearchOpen(false)
     setSearchQuery('')
@@ -115,17 +111,6 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
       setSearchResults([])
     }
   }
-
-  const isActive = (path: string) => {
-    return location.pathname === path
-  }
-
-  const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/catalog', label: 'Catalog' },
-    { path: '/about', label: 'Our Story' },
-    { path: '/contact', label: 'Contact' }
-  ]
 
   const categories = [
     { name: 'Gardening', path: '/catalog?category=gardening' },
