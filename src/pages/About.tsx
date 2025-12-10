@@ -13,11 +13,11 @@ export const About: React.FC = () => {
                 backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 35%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDEZblw6tq4y0RcggIYTAzjlG9O-hGjTlUslz5uwyR0dLvjkNBkFS5BndyG_aOZH5nwbf-gE6V-RscELdPUHJ5hpuqKAdBJ4_dSZMK-yRNCwzwbNsInLA_HPE4LpH98qN27KaaavI7ceM1U0X5pqwMHnkqv6vaGXE0ppgcZZ_hOyCcn8US8exbuzqN-JMtv_RXwd5vFYDYiJVpEi5PcTNLZOSu2L3zRaJgfDNE7V1LBfshNFzyvQsKe00cD4k43s7a-pziwQdFhILY")`
               }}
             >
-              <div className="p-6 md:p-10">
-                <h1 className="text-white text-3xl md:text-5xl font-bold tracking-tight">
+              <div className="p-4 sm:p-6 md:p-10">
+                <h1 className="text-white text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight">
                   About Edhi Yaaparam
                 </h1>
-                <p className="text-white/90 mt-2 text-lg md:text-xl max-w-2xl">
+                <p className="text-white/90 mt-2 text-base sm:text-lg md:text-xl max-w-2xl">
                   From a Passion Project to a Community of 150,000+ Plant Lovers
                 </p>
               </div>
@@ -26,19 +26,19 @@ export const About: React.FC = () => {
         </div>
 
         {/* Our Story Section */}
-        <section className="px-4 py-12 sm:px-6 lg:py-16 lg:px-8">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section className="px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div className="order-2 lg:order-1">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
                 Our Story – Edhi Yaaparam
               </h2>
-              <p className="mt-4 text-base leading-relaxed text-gray-700 dark:text-gray-300">
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-gray-700 dark:text-gray-300">
                 From a humble passion project to a thriving community of over 150,000 plant lovers,
                 our journey has been a story of growth, learning, and connection. It all started
                 with a single seed of an idea: to share the joy of gardening through our YouTube
                 channel.
               </p>
-              <p className="mt-4 text-base leading-relaxed text-gray-700 dark:text-gray-300">
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-gray-700 dark:text-gray-300">
                 What began in a small corner of Hyderabad has blossomed into a full-fledged nursery
                 and a digital haven for enthusiasts across India. Achieving the 150K subscriber
                 milestone wasn't just a number for us; it was a testament to the beautiful
@@ -47,13 +47,13 @@ export const About: React.FC = () => {
             </div>
             <div className="order-1 lg:order-2">
               <div
-                className="relative flex items-center justify-center bg-cover bg-center aspect-video rounded-xl overflow-hidden shadow-lg"
+                className="relative flex items-center justify-center bg-cover bg-center aspect-video rounded-lg sm:rounded-xl overflow-hidden shadow-lg"
                 style={{
                   backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuAE-Dr-mulzxeuWKNF53B8lA7pq8ILKn8LkEzOCNzF0XO1Wt6aDc2pDOUBAmNUNngP5WBVuQZK22sfnz-bAtepsOTWAYn6Nn3qxAS-vL_AQGfAjZOL_RNdXpO8D8OQN3gnA-YdE4bNYxf79H-sIts43di5ozBgh43r8zwVOfCPmXo--2f5SH-hs5IP_tSxemwLWm74Va292DcmGmg7nrw1W9vPjaqC_d6pL-0aGV2Lg7ZJ5A2WIWKGVvVBIbvKfq-ckJkVeQqvnbjs")`
                 }}
               >
-                <button className="flex shrink-0 items-center justify-center rounded-full size-16 bg-black/50 text-white backdrop-blur-sm transition-transform hover:scale-110">
-                  <span className="material-symbols-outlined text-4xl">play_arrow</span>
+                <button className="flex shrink-0 items-center justify-center rounded-full size-12 sm:size-16 bg-black/50 text-white backdrop-blur-sm transition-transform hover:scale-110">
+                  <span className="material-symbols-outlined text-3xl sm:text-4xl">play_arrow</span>
                 </button>
               </div>
             </div>
@@ -61,17 +61,17 @@ export const About: React.FC = () => {
         </section>
 
         {/* Mission Section */}
-        <section className="bg-white/50 dark:bg-black/20 px-4 py-16 sm:px-6 lg:py-24 lg:px-8">
+        <section className="bg-white/50 dark:bg-black/20 px-4 py-12 sm:py-16 sm:px-6 lg:py-24 lg:px-8">
           <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               Helping India Grow Greener
             </h2>
-            <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700 dark:text-gray-300">
+            <p className="mt-3 sm:mt-4 max-w-3xl mx-auto text-base sm:text-lg text-gray-700 dark:text-gray-300 px-4">
               Our mission is simple: to inspire and empower everyone to bring a piece of nature
               into their homes. We believe that plants have the power to transform spaces, improve
               well-being, and connect us back to the earth.
             </p>
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-left">
               {/* Mission Card 1 */}
               <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl border border-gray-200/80 dark:border-gray-800/80 shadow-sm">
                 <div className="flex items-center justify-center size-12 rounded-lg bg-primary/20 text-primary">

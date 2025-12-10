@@ -23,40 +23,40 @@ const testimonials = [
 
 export const TestimonialsSection: React.FC = () => {
   return (
-    <section className="w-full bg-card-light dark:bg-card-dark py-16 md:py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex flex-col gap-12 md:gap-16">
-          <div className="flex flex-col items-center gap-6 text-center animate-fade-in-up">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-text-light dark:text-text-dark max-w-3xl">
+    <section className="w-full bg-card-light dark:bg-card-dark py-12 sm:py-16 md:py-24 lg:py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-8 sm:gap-12 md:gap-16">
+          <div className="flex flex-col items-center gap-4 sm:gap-6 text-center animate-fade-in-up">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-text-light dark:text-text-dark max-w-3xl px-4">
               Success Stories from Our <span className="gradient-text">Community</span>
             </h2>
-            <p className="text-lg md:text-xl text-subtle-light dark:text-subtle-dark max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-subtle-light dark:text-subtle-dark max-w-2xl leading-relaxed px-4">
               See how we've helped fellow plant lovers transform their spaces.
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index} 
-                className="group flex flex-col gap-6 rounded-2xl border border-border-light bg-background-light p-8 transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 dark:border-border-dark dark:bg-background-dark"
+                className="group flex flex-col gap-4 sm:gap-6 rounded-xl sm:rounded-2xl border border-border-light bg-background-light p-6 sm:p-8 transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 dark:border-border-dark dark:bg-background-dark"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="flex items-center gap-4">
-                  <div className="relative">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="relative flex-shrink-0">
                     <img 
                       alt={testimonial.name}
-                      className="h-16 w-16 rounded-full object-cover ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all duration-300"
+                      className="h-12 w-12 sm:h-16 sm:w-16 rounded-full object-cover ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all duration-300"
                       src={testimonial.image}
                     />
-                    <div className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full bg-primary border-2 border-white dark:border-background-dark"></div>
+                    <div className="absolute -bottom-1 -right-1 h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-primary border-2 border-white dark:border-background-dark"></div>
                   </div>
                   <div>
-                    <p className="font-bold text-lg text-text-light dark:text-text-dark">{testimonial.name}</p>
-                    <p className="text-sm text-subtle-light dark:text-subtle-dark">{testimonial.role}</p>
+                    <p className="font-bold text-base sm:text-lg text-text-light dark:text-text-dark">{testimonial.name}</p>
+                    <p className="text-xs sm:text-sm text-subtle-light dark:text-subtle-dark">{testimonial.role}</p>
                   </div>
                 </div>
-                <p className="text-text-light dark:text-text-dark leading-relaxed text-base italic relative pl-6">
-                  <span className="absolute left-0 top-0 text-4xl text-primary/30 font-serif leading-none">"</span>
+                <p className="text-sm sm:text-base text-text-light dark:text-text-dark leading-relaxed italic relative pl-4 sm:pl-6">
+                  <span className="absolute left-0 top-0 text-3xl sm:text-4xl text-primary/30 font-serif leading-none">"</span>
                   {testimonial.quote}
                 </p>
               </div>

@@ -19,27 +19,27 @@ export const OffersSection: React.FC = () => {
   })
 
   return (
-    <section className="w-full py-12 md:py-20 bg-background-light dark:bg-background-dark">
+    <section className="w-full py-8 sm:py-12 md:py-20 bg-background-light dark:bg-background-dark">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
           <div>
-            <h2 className="text-3xl md:text-4xl font-black text-text-light dark:text-text-dark mb-2">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-text-light dark:text-text-dark mb-2">
               Special Offers
             </h2>
-            <p className="text-lg text-text-light/70 dark:text-text-dark/70">
+            <p className="text-base sm:text-lg text-text-light/70 dark:text-text-dark/70">
               Special Deals for this Week
             </p>
           </div>
           <button
             onClick={() => navigate('/catalog')}
-            className="hidden sm:flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors font-semibold"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors font-semibold text-sm sm:text-base"
           >
             View All Collection
-            <span className="material-symbols-outlined">arrow_forward</span>
+            <span className="material-symbols-outlined text-base sm:text-lg">arrow_forward</span>
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {offerPlants.map((plant) => (
             <div
               key={plant.id}
@@ -85,12 +85,12 @@ export const OffersSection: React.FC = () => {
           {/* View All Card */}
           <div
             onClick={() => navigate('/catalog')}
-            className="group cursor-pointer flex items-center justify-center rounded-xl bg-primary text-white p-8 hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg"
+            className="group cursor-pointer flex items-center justify-center rounded-lg sm:rounded-xl bg-primary text-white p-6 sm:p-8 hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg min-h-[200px] sm:min-h-[250px]"
           >
             <div className="text-center">
-              <span className="material-symbols-outlined text-5xl mb-4 block">shopping_bag</span>
-              <p className="text-xl font-bold">View All</p>
-              <p className="text-sm opacity-90">Collection</p>
+              <span className="material-symbols-outlined text-4xl sm:text-5xl mb-3 sm:mb-4 block">shopping_bag</span>
+              <p className="text-lg sm:text-xl font-bold">View All</p>
+              <p className="text-xs sm:text-sm opacity-90">Collection</p>
             </div>
           </div>
         </div>

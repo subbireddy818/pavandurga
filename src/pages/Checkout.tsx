@@ -55,16 +55,16 @@ export const Checkout: React.FC = () => {
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
       <UnifiedHeader />
-      <div className="pt-40">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-black text-text-light dark:text-text-dark mb-8">Checkout</h1>
+      <div className="pt-24 sm:pt-32 md:pt-40">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-text-light dark:text-text-dark mb-6 sm:mb-8">Checkout</h1>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Checkout Form */}
             <div className="lg:col-span-2">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="p-6 rounded-xl bg-white dark:bg-gray-800/50 border border-border-light dark:border-border-dark">
-                  <h2 className="text-xl font-bold text-text-light dark:text-text-dark mb-6">Shipping Details</h2>
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="p-4 sm:p-6 rounded-lg sm:rounded-xl bg-white dark:bg-gray-800/50 border border-border-light dark:border-border-dark">
+                  <h2 className="text-lg sm:text-xl font-bold text-text-light dark:text-text-dark mb-4 sm:mb-6">Shipping Details</h2>
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-text-light dark:text-text-dark mb-2">
@@ -151,35 +151,35 @@ export const Checkout: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-6 rounded-xl bg-white dark:bg-gray-800/50 border border-border-light dark:border-border-dark">
-                  <h2 className="text-xl font-bold text-text-light dark:text-text-dark mb-6">Payment Method</h2>
+                <div className="p-4 sm:p-6 rounded-lg sm:rounded-xl bg-white dark:bg-gray-800/50 border border-border-light dark:border-border-dark">
+                  <h2 className="text-lg sm:text-xl font-bold text-text-light dark:text-text-dark mb-4 sm:mb-6">Payment Method</h2>
                   <div className="space-y-3">
-                    <label className="flex items-center gap-3 p-4 rounded-lg border-2 border-primary bg-primary/5 cursor-pointer">
+                    <label className="flex items-center gap-3 p-3 sm:p-4 rounded-lg border-2 border-primary bg-primary/5 cursor-pointer">
                       <input
                         type="radio"
                         name="paymentMethod"
                         value="cod"
                         checked={formData.paymentMethod === 'cod'}
                         onChange={handleChange}
-                        className="w-5 h-5 text-primary"
+                        className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0"
                       />
                       <div>
-                        <p className="font-semibold text-text-light dark:text-text-dark">Cash on Delivery</p>
-                        <p className="text-sm text-text-light/70 dark:text-text-dark/70">Pay when you receive</p>
+                        <p className="font-semibold text-sm sm:text-base text-text-light dark:text-text-dark">Cash on Delivery</p>
+                        <p className="text-xs sm:text-sm text-text-light/70 dark:text-text-dark/70">Pay when you receive</p>
                       </div>
                     </label>
-                    <label className="flex items-center gap-3 p-4 rounded-lg border-2 border-border-light dark:border-border-dark cursor-pointer hover:border-primary/50 transition-colors">
+                    <label className="flex items-center gap-3 p-3 sm:p-4 rounded-lg border-2 border-border-light dark:border-border-dark cursor-pointer hover:border-primary/50 transition-colors">
                       <input
                         type="radio"
                         name="paymentMethod"
                         value="online"
                         checked={formData.paymentMethod === 'online'}
                         onChange={handleChange}
-                        className="w-5 h-5 text-primary"
+                        className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0"
                       />
                       <div>
-                        <p className="font-semibold text-text-light dark:text-text-dark">Online Payment</p>
-                        <p className="text-sm text-text-light/70 dark:text-text-dark/70">Pay securely online</p>
+                        <p className="font-semibold text-sm sm:text-base text-text-light dark:text-text-dark">Online Payment</p>
+                        <p className="text-xs sm:text-sm text-text-light/70 dark:text-text-dark/70">Pay securely online</p>
                       </div>
                     </label>
                   </div>
@@ -187,7 +187,7 @@ export const Checkout: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full py-4 bg-primary text-white rounded-xl font-bold text-lg hover:bg-primary/90 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/50"
+                  className="w-full py-3 sm:py-4 bg-primary text-white rounded-lg sm:rounded-xl font-bold text-base sm:text-lg hover:bg-primary/90 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/50"
                 >
                   Place Order
                 </button>
@@ -196,26 +196,26 @@ export const Checkout: React.FC = () => {
 
             {/* Order Summary */}
             <div className="lg:col-span-1">
-              <div className="sticky top-32 p-6 rounded-xl bg-white dark:bg-gray-800/50 border border-border-light dark:border-border-dark shadow-lg">
-                <h2 className="text-xl font-bold text-text-light dark:text-text-dark mb-6">Order Summary</h2>
-                <div className="space-y-3 mb-6">
+              <div className="sticky top-24 sm:top-32 p-4 sm:p-6 rounded-lg sm:rounded-xl bg-white dark:bg-gray-800/50 border border-border-light dark:border-border-dark shadow-lg">
+                <h2 className="text-lg sm:text-xl font-bold text-text-light dark:text-text-dark mb-4 sm:mb-6">Order Summary</h2>
+                <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                   {cartItems.map((item) => (
-                    <div key={item.id} className="flex justify-between text-sm text-text-light/70 dark:text-text-dark/70">
-                      <span>{item.name} x{item.quantity}</span>
-                      <span>₹{(parseInt(item.price.replace('₹', '').replace(',', '')) * item.quantity).toLocaleString()}</span>
+                    <div key={item.id} className="flex justify-between text-xs sm:text-sm text-text-light/70 dark:text-text-dark/70">
+                      <span className="truncate pr-2">{item.name} x{item.quantity}</span>
+                      <span className="flex-shrink-0">₹{(parseInt(item.price.replace('₹', '').replace(',', '')) * item.quantity).toLocaleString()}</span>
                     </div>
                   ))}
                 </div>
-                <div className="border-t border-border-light dark:border-border-dark pt-4 space-y-2 mb-6">
-                  <div className="flex justify-between text-text-light/70 dark:text-text-dark/70">
+                <div className="border-t border-border-light dark:border-border-dark pt-3 sm:pt-4 space-y-2 mb-4 sm:mb-6">
+                  <div className="flex justify-between text-sm sm:text-base text-text-light/70 dark:text-text-dark/70">
                     <span>Subtotal</span>
                     <span>₹{totalPrice.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-text-light/70 dark:text-text-dark/70">
+                  <div className="flex justify-between text-sm sm:text-base text-text-light/70 dark:text-text-dark/70">
                     <span>Shipping</span>
                     <span className="text-primary">Free</span>
                   </div>
-                  <div className="flex justify-between text-xl font-bold text-text-light dark:text-text-dark pt-2 border-t border-border-light dark:border-border-dark">
+                  <div className="flex justify-between text-lg sm:text-xl font-bold text-text-light dark:text-text-dark pt-2 border-t border-border-light dark:border-border-dark">
                     <span>Total</span>
                     <span className="text-primary">₹{totalPrice.toLocaleString()}</span>
                   </div>

@@ -23,16 +23,16 @@ export const Contact: React.FC = () => {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
-      <main className="container mx-auto px-6 py-12 md:py-20 flex-grow pt-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+      <main className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-20 flex-grow pt-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
           {/* Left Column: Contact Form & Details */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6 sm:gap-8">
             {/* Page Heading */}
             <div>
-              <h1 className="text-gray-900 dark:text-white text-4xl lg:text-5xl font-black tracking-tighter">
+              <h1 className="text-gray-900 dark:text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter">
                 Get In Touch
               </h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-3 text-lg">
+              <p className="text-gray-600 dark:text-gray-400 mt-2 sm:mt-3 text-base sm:text-lg">
                 We'd love to hear from you. Fill out the form below or use our contact details to
                 reach out.
               </p>
@@ -142,12 +142,12 @@ export const Contact: React.FC = () => {
           </div>
 
           {/* Right Column: Map & Visit Info */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6 sm:gap-8">
             <div>
-              <h2 className="text-gray-900 dark:text-white text-4xl lg:text-5xl font-black tracking-tighter">
+              <h2 className="text-gray-900 dark:text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter">
                 Visit Our Nursery
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 mt-3 text-lg">
+              <p className="text-gray-600 dark:text-gray-400 mt-2 sm:mt-3 text-base sm:text-lg">
                 Come see our collection in person. We are located in the heart of Hyderabad.
               </p>
             </div>

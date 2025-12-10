@@ -24,7 +24,7 @@ function Home() {
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark overflow-x-hidden">
       <UnifiedHeader />
       <main className="flex-grow w-full">
-        <div className="pt-52">
+        <div className="pt-24 sm:pt-32 md:pt-40 lg:pt-52">
           <CategoriesSection />
         </div>
         <HeroSection />
@@ -43,7 +43,7 @@ function CatalogPage() {
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark overflow-x-hidden">
       <UnifiedHeader showSearch={true} />
-      <div className="pt-40">
+      <div className="pt-24 sm:pt-32 md:pt-40">
         <Catalog />
       </div>
       <CatalogFooter />
@@ -56,7 +56,7 @@ function AboutPage() {
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark overflow-x-hidden">
       <UnifiedHeader />
-      <div className="pt-52">
+      <div className="pt-24 sm:pt-32 md:pt-40 lg:pt-52">
         <About />
       </div>
       <AboutFooter />
@@ -69,7 +69,7 @@ function ContactPage() {
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark overflow-x-hidden">
       <UnifiedHeader />
-      <div className="pt-52">
+      <div className="pt-24 sm:pt-32 md:pt-40 lg:pt-52">
         <Contact />
       </div>
       <ContactFooter />

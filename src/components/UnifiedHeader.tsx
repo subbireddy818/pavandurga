@@ -19,8 +19,12 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchResults, setSearchResults] = useState<Plant[]>([])
   const [isCategoryOpen, setIsCategoryOpen] = useState<string | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
+  const mobileSearchRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const mobileInputRef = useRef<HTMLInputElement>(null)
   const cartItemCount = getTotalItems()
   const isCatalogPage = location.pathname === '/catalog' || location.pathname.startsWith('/product')
 
@@ -54,35 +58,48 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
   // Close search when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      const isDesktopSearch = searchRef.current && searchRef.current.contains(event.target as Node)
+      const isMobileSearch = mobileSearchRef.current && mobileSearchRef.current.contains(event.target as Node)
+      
+      if (!isDesktopSearch && !isMobileSearch) {
         setIsSearchOpen(false)
-        setSearchQuery('')
-        setSearchResults([])
+        if (!isMobileSearchOpen) {
+          setSearchQuery('')
+          setSearchResults([])
+        }
       }
     }
 
     if (isSearchOpen) {
       document.addEventListener('mousedown', handleClickOutside)
-      setTimeout(() => inputRef.current?.focus(), 100)
+      setTimeout(() => {
+        inputRef.current?.focus()
+        mobileInputRef.current?.focus()
+      }, 100)
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [isSearchOpen])
+  }, [isSearchOpen, isMobileSearchOpen])
 
   // Close search on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isSearchOpen) {
-        setIsSearchOpen(false)
-        setSearchQuery('')
-        setSearchResults([])
+      if (e.key === 'Escape') {
+        if (isSearchOpen) {
+          setIsSearchOpen(false)
+          setSearchQuery('')
+          setSearchResults([])
+        }
+        if (isMobileSearchOpen) {
+          setIsMobileSearchOpen(false)
+        }
       }
     }
     window.addEventListener('keydown', handleEscape)
     return () => window.removeEventListener('keydown', handleEscape)
-  }, [isSearchOpen])
+  }, [isSearchOpen, isMobileSearchOpen])
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -97,6 +114,7 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
 
   const handlePlantClick = (plant: Plant) => {
     setIsSearchOpen(false)
+    setIsMobileSearchOpen(false)
     setSearchQuery('')
     setSearchResults([])
     navigate('/catalog', { state: { searchQuery: plant.name } })
@@ -106,6 +124,7 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
     e.preventDefault()
     if (searchQuery.trim()) {
       setIsSearchOpen(false)
+      setIsMobileSearchOpen(false)
       navigate('/catalog', { state: { searchQuery } })
       setSearchQuery('')
       setSearchResults([])
@@ -134,7 +153,7 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
       }`}
     >
       {/* Top Navigation Bar */}
-      <div className={`w-full bg-gray-800 dark:bg-gray-900 border-b border-gray-700 dark:border-gray-800 transition-all duration-300 overflow-hidden ${showTopBar ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0'}`}>
+      <div className={`w-full bg-gray-800 dark:bg-gray-900 border-b border-gray-700 dark:border-gray-800 transition-all duration-300 overflow-hidden ${showTopBar ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0'} hidden md:block`}>
         <div className="w-full max-w-[1920px] mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-2 text-xs sm:text-sm">
           {/* Social Media Icons (Left) */}
           <div className="flex items-center gap-3">
@@ -181,26 +200,35 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
 
       {/* Main Header */}
       <div className="w-full max-w-[1920px] mx-auto flex items-center justify-between whitespace-nowrap px-4 sm:px-6 lg:px-8 py-3">
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors"
+        >
+          <span className="material-symbols-outlined text-lg">
+            {isMobileMenuOpen ? 'close' : 'menu'}
+          </span>
+        </button>
+
         {/* Logo */}
         <div
           className="flex items-center text-text-light dark:text-text-dark group cursor-pointer"
           onClick={() => navigate('/')}
         >
-          <h2 className="text-xl font-bold tracking-tight">
+          <h2 className="text-base sm:text-lg md:text-xl font-bold tracking-tight">
             <span className="text-primary">pavandurganursery</span>
-            <span className="text-text-light dark:text-text-dark">.com</span>
+            <span className="text-text-light dark:text-text-dark hidden sm:inline">.com</span>
           </h2>
         </div>
 
-        {/* Search Bar */}
-        <div className="mx-4 sm:mx-8 relative flex items-center gap-0" ref={searchRef}>
-          <form onSubmit={handleSearchSubmit} className="flex items-center gap-0">
-            <div className="border border-gray-300 focus-within:border-primary transition-colors bg-white dark:bg-gray-800/50 shadow-sm flex items-center" style={{ width: '904.94px', height: '46px' }}>
+        {/* Desktop Search Bar */}
+        <div className="hidden md:flex mx-4 sm:mx-8 relative items-center gap-0 flex-1 max-w-2xl" ref={searchRef}>
+          <form onSubmit={handleSearchSubmit} className="flex items-center gap-0 w-full">
+            <div className="border border-gray-300 focus-within:border-primary transition-colors bg-white dark:bg-gray-800/50 shadow-sm flex items-center flex-1">
               <input
                 ref={inputRef}
                 type="text"
-                className="w-full bg-transparent text-text-light dark:text-text-dark placeholder:text-text-light/50 dark:placeholder:text-text-dark/50 focus:outline-none text-base"
-                style={{ height: '46px', padding: '0 20px', lineHeight: '46px', boxSizing: 'border-box' }}
+                className="w-full bg-transparent text-text-light dark:text-text-dark placeholder:text-text-light/50 dark:placeholder:text-text-dark/50 focus:outline-none text-sm sm:text-base h-10 sm:h-12 px-3 sm:px-5"
                 placeholder="What are you looking for?"
                 value={searchQuery}
                 onChange={handleSearchChange}
@@ -209,8 +237,7 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
             </div>
             <button
               type="submit"
-              className="bg-primary text-white hover:bg-primary/90 transition-colors font-medium flex items-center justify-center flex-shrink-0"
-              style={{ width: '54px', height: '46px' }}
+              className="bg-primary text-white hover:bg-primary/90 transition-colors font-medium flex items-center justify-center flex-shrink-0 h-10 sm:h-12 w-10 sm:w-12"
             >
               <span className="material-symbols-outlined text-lg">search</span>
             </button>
@@ -254,9 +281,17 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
           )}
         </div>
 
+        {/* Mobile Search Button */}
+        <button
+          onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors"
+        >
+          <span className="material-symbols-outlined text-lg">search</span>
+        </button>
+
         {/* Right Icons */}
-        <div className="flex items-center gap-3 sm:gap-4">
-          <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors text-xs sm:text-sm">
+        <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+          <button className="hidden sm:flex items-center gap-2 px-2 sm:px-3 py-2 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors text-xs sm:text-sm">
             <span className="material-symbols-outlined text-base">person</span>
             <span className="hidden lg:inline">Login</span>
           </button>
@@ -274,9 +309,127 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
         </div>
       </div>
 
+      {/* Mobile Search Bar */}
+      {isMobileSearchOpen && (
+        <div className="md:hidden w-full px-4 pb-3 relative" ref={mobileSearchRef}>
+          <form onSubmit={handleSearchSubmit} className="flex items-center gap-0 w-full">
+            <div className="border border-gray-300 focus-within:border-primary transition-colors bg-white dark:bg-gray-800/50 shadow-sm flex items-center flex-1">
+              <input
+                ref={mobileInputRef}
+                type="text"
+                className="w-full bg-transparent text-text-light dark:text-text-dark placeholder:text-text-light/50 dark:placeholder:text-text-dark/50 focus:outline-none text-base h-12 px-4"
+                placeholder="What are you looking for?"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onFocus={() => setIsSearchOpen(true)}
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-primary text-white hover:bg-primary/90 transition-colors font-medium flex items-center justify-center flex-shrink-0 h-12 w-12"
+            >
+              <span className="material-symbols-outlined text-lg">search</span>
+            </button>
+          </form>
+
+          {/* Mobile Search Results Dropdown */}
+          {isSearchOpen && (searchResults.length > 0 || searchQuery.trim().length > 0) && (
+            <div className="absolute left-4 right-4 mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50 max-h-[400px] overflow-hidden">
+              {searchResults.length > 0 ? (
+                <div className="max-h-[350px] overflow-y-auto">
+                  {searchResults.map((plant) => (
+                    <button
+                      key={plant.id}
+                      onClick={() => {
+                        handlePlantClick(plant)
+                        setIsMobileSearchOpen(false)
+                      }}
+                      className="w-full flex items-center gap-3 p-3 hover:bg-background-light dark:hover:bg-gray-700 transition-colors text-left border-b border-gray-100 dark:border-gray-700 last:border-0"
+                    >
+                      <img
+                        src={plant.image}
+                        alt={plant.name}
+                        className="w-12 h-12 rounded-lg object-cover"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-text-light dark:text-text-dark truncate">
+                          {plant.name}
+                        </p>
+                        <p className="text-xs text-text-light/60 dark:text-text-dark/60">{plant.price}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              ) : searchQuery.trim().length > 0 ? (
+                <div className="p-4 text-center text-sm text-text-light/60 dark:text-text-dark/60">
+                  No plants found matching "{searchQuery}"
+                </div>
+              ) : (
+                <div className="p-4 text-center text-sm text-text-light/60 dark:text-text-dark/60">
+                  Start typing to search for plants...
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden w-full bg-background-light dark:bg-background-dark border-t border-border-light dark:border-border-dark">
+          <div className="px-4 py-4 space-y-3">
+            <Link
+              to="/rewards"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block py-2 text-text-light dark:text-text-dark hover:text-primary transition-colors"
+            >
+              Rewards
+            </Link>
+            <Link
+              to="/help"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block py-2 text-text-light dark:text-text-dark hover:text-primary transition-colors"
+            >
+              Help
+            </Link>
+            <Link
+              to="/orders"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block py-2 text-text-light dark:text-text-dark hover:text-primary transition-colors"
+            >
+              My Orders
+            </Link>
+            <Link
+              to="/offers"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block py-2 text-text-light dark:text-text-dark hover:text-primary transition-colors"
+            >
+              Offers
+            </Link>
+            <button
+              onClick={() => {
+                navigate('/cart')
+                setIsMobileMenuOpen(false)
+              }}
+              className="w-full flex items-center gap-2 py-2 text-text-light dark:text-text-dark hover:text-primary transition-colors"
+            >
+              <span className="material-symbols-outlined">shopping_cart</span>
+              Cart {cartItemCount > 0 && `(${cartItemCount})`}
+            </button>
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="w-full flex items-center gap-2 py-2 text-text-light dark:text-text-dark hover:text-primary transition-colors"
+            >
+              <span className="material-symbols-outlined">person</span>
+              Login
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Category Navigation Menu */}
       {!isCatalogPage && (
-        <div className={`w-full bg-background-light/95 dark:bg-background-dark/95 border-t border-border-light/20 dark:border-border-dark/20 transition-all duration-300 overflow-hidden ${showCategoryBar ? 'max-h-16 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className={`w-full bg-background-light/95 dark:bg-background-dark/95 border-t border-border-light/20 dark:border-border-dark/20 transition-all duration-300 overflow-hidden ${showCategoryBar ? 'max-h-16 opacity-100' : 'max-h-0 opacity-0'} hidden md:block`}>
           <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="flex items-center gap-1 sm:gap-2 overflow-x-auto scrollbar-hide py-2">
               {categories.map((category) => (
@@ -318,6 +471,27 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
               </div>
               ))}
             </nav>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Category Menu */}
+      {!isCatalogPage && isMobileMenuOpen && (
+        <div className="md:hidden w-full bg-background-light dark:bg-background-dark border-t border-border-light dark:border-border-dark">
+          <div className="px-4 py-4">
+            <h3 className="text-sm font-semibold text-text-light dark:text-text-dark mb-3">Categories</h3>
+            <div className="space-y-2">
+              {categories.map((category) => (
+                <Link
+                  key={category.name}
+                  to={category.path}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block py-2 text-text-light dark:text-text-dark hover:text-primary transition-colors"
+                >
+                  {category.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       )}
