@@ -182,18 +182,8 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
 
       {/* Main Header */}
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-3">
-        {/* Top Row: Menu, Logo, and Icons */}
-        <div className="flex items-center justify-between whitespace-nowrap mb-2 md:mb-0">
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors"
-          >
-            <span className="material-symbols-outlined text-lg">
-              {isMobileMenuOpen ? 'close' : 'menu'}
-            </span>
-          </button>
-
+        {/* Desktop Layout: Single Row */}
+        <div className="hidden md:flex items-center justify-between whitespace-nowrap">
           {/* Logo */}
           <div
             className="flex items-center text-text-light dark:text-text-dark group cursor-pointer"
@@ -201,32 +191,12 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
           >
             <h2 className="text-base sm:text-lg md:text-xl font-bold tracking-tight">
               <span className="text-primary">pavandurganursery</span>
-              <span className="text-text-light dark:text-text-dark hidden sm:inline">.com</span>
+              <span className="text-text-light dark:text-text-dark">.com</span>
             </h2>
           </div>
 
-          {/* Right Icons */}
-          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-            <button className="hidden sm:flex items-center gap-2 px-2 sm:px-3 py-2 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors text-xs sm:text-sm">
-              <span className="material-symbols-outlined text-base">person</span>
-              <span className="hidden lg:inline">Login</span>
-            </button>
-            <button
-              onClick={() => navigate('/cart')}
-              className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors relative"
-            >
-              <span className="material-symbols-outlined text-lg">shopping_cart</span>
-              {cartItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-primary text-white text-xs font-bold">
-                  {cartItemCount > 99 ? '99+' : cartItemCount}
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Search Bar - Always Visible */}
-        <div className="flex mx-0 md:mx-4 lg:mx-8 relative items-center gap-0 w-full md:flex-1 md:max-w-2xl" ref={searchRef}>
+          {/* Desktop Search Bar */}
+          <div className="flex mx-4 sm:mx-8 relative items-center gap-0 flex-1 max-w-2xl" ref={searchRef}>
           <form onSubmit={handleSearchSubmit} className="flex items-center gap-0 w-full">
             <div className="border border-gray-300 focus-within:border-primary transition-colors bg-white dark:bg-gray-800/50 shadow-sm flex items-center flex-1">
               <input
@@ -247,42 +217,164 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
             </button>
           </form>
 
-          {/* Search Results Dropdown */}
-          {isSearchOpen && (searchResults.length > 0 || searchQuery.trim().length > 0) && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50 max-h-[500px] overflow-hidden">
-              {searchResults.length > 0 ? (
-                <div className="max-h-[400px] overflow-y-auto">
-                  {searchResults.map((plant) => (
-                    <button
-                      key={plant.id}
-                      onClick={() => handlePlantClick(plant)}
-                      className="w-full flex items-center gap-3 p-3 hover:bg-background-light dark:hover:bg-gray-700 transition-colors text-left border-b border-gray-100 dark:border-gray-700 last:border-0"
-                    >
-                      <img
-                        src={plant.image}
-                        alt={plant.name}
-                        className="w-12 h-12 rounded-lg object-cover"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-text-light dark:text-text-dark truncate">
-                          {plant.name}
-                        </p>
-                        <p className="text-xs text-text-light/60 dark:text-text-dark/60">{plant.price}</p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              ) : searchQuery.trim().length > 0 ? (
-                <div className="p-4 text-center text-sm text-text-light/60 dark:text-text-dark/60">
-                  No plants found matching "{searchQuery}"
-                </div>
-              ) : (
-                <div className="p-4 text-center text-sm text-text-light/60 dark:text-text-dark/60">
-                  Start typing to search for plants...
-                </div>
+            {/* Search Results Dropdown */}
+            {isSearchOpen && (searchResults.length > 0 || searchQuery.trim().length > 0) && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50 max-h-[500px] overflow-hidden">
+                {searchResults.length > 0 ? (
+                  <div className="max-h-[400px] overflow-y-auto">
+                    {searchResults.map((plant) => (
+                      <button
+                        key={plant.id}
+                        onClick={() => handlePlantClick(plant)}
+                        className="w-full flex items-center gap-3 p-3 hover:bg-background-light dark:hover:bg-gray-700 transition-colors text-left border-b border-gray-100 dark:border-gray-700 last:border-0"
+                      >
+                        <img
+                          src={plant.image}
+                          alt={plant.name}
+                          className="w-12 h-12 rounded-lg object-cover"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-text-light dark:text-text-dark truncate">
+                            {plant.name}
+                          </p>
+                          <p className="text-xs text-text-light/60 dark:text-text-dark/60">{plant.price}</p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : searchQuery.trim().length > 0 ? (
+                  <div className="p-4 text-center text-sm text-text-light/60 dark:text-text-dark/60">
+                    No plants found matching "{searchQuery}"
+                  </div>
+                ) : (
+                  <div className="p-4 text-center text-sm text-text-light/60 dark:text-text-dark/60">
+                    Start typing to search for plants...
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Right Icons - Desktop */}
+          <div className="flex items-center gap-3 md:gap-4">
+            <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors text-sm">
+              <span className="material-symbols-outlined text-base">person</span>
+              <span className="hidden lg:inline">Login</span>
+            </button>
+            <button
+              onClick={() => navigate('/cart')}
+              className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors relative"
+            >
+              <span className="material-symbols-outlined text-lg">shopping_cart</span>
+              {cartItemCount > 0 && (
+                <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-primary text-white text-xs font-bold">
+                  {cartItemCount > 99 ? '99+' : cartItemCount}
+                </span>
               )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Layout: Two Rows */}
+        <div className="md:hidden">
+          {/* Top Row: Menu, Logo, and Icons */}
+          <div className="flex items-center justify-between whitespace-nowrap mb-2">
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors"
+            >
+              <span className="material-symbols-outlined text-lg">
+                {isMobileMenuOpen ? 'close' : 'menu'}
+              </span>
+            </button>
+
+            {/* Logo */}
+            <div
+              className="flex items-center text-text-light dark:text-text-dark group cursor-pointer"
+              onClick={() => navigate('/')}
+            >
+              <h2 className="text-base sm:text-lg font-bold tracking-tight">
+                <span className="text-primary">pavandurganursery</span>
+                <span className="text-text-light dark:text-text-dark hidden sm:inline">.com</span>
+              </h2>
             </div>
-          )}
+
+            {/* Right Icons - Mobile */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => navigate('/cart')}
+                className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 dark:bg-primary/10 text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/20 transition-colors relative"
+              >
+                <span className="material-symbols-outlined text-lg">shopping_cart</span>
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-primary text-white text-xs font-bold">
+                    {cartItemCount > 99 ? '99+' : cartItemCount}
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Search Bar - Always Visible on Mobile */}
+          <div className="flex relative items-center gap-0 w-full" ref={searchRef}>
+            <form onSubmit={handleSearchSubmit} className="flex items-center gap-0 w-full">
+              <div className="border border-gray-300 focus-within:border-primary transition-colors bg-white dark:bg-gray-800/50 shadow-sm flex items-center flex-1">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  className="w-full bg-transparent text-text-light dark:text-text-dark placeholder:text-text-light/50 dark:placeholder:text-text-dark/50 focus:outline-none text-sm h-10 px-3"
+                  placeholder="What are you looking for?"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  onFocus={() => setIsSearchOpen(true)}
+                />
+              </div>
+              <button
+                type="submit"
+                className="bg-primary text-white hover:bg-primary/90 transition-colors font-medium flex items-center justify-center flex-shrink-0 h-10 w-10"
+              >
+                <span className="material-symbols-outlined text-lg">search</span>
+              </button>
+            </form>
+
+            {/* Mobile Search Results Dropdown */}
+            {isSearchOpen && (searchResults.length > 0 || searchQuery.trim().length > 0) && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50 max-h-[400px] overflow-hidden">
+                {searchResults.length > 0 ? (
+                  <div className="max-h-[350px] overflow-y-auto">
+                    {searchResults.map((plant) => (
+                      <button
+                        key={plant.id}
+                        onClick={() => handlePlantClick(plant)}
+                        className="w-full flex items-center gap-3 p-3 hover:bg-background-light dark:hover:bg-gray-700 transition-colors text-left border-b border-gray-100 dark:border-gray-700 last:border-0"
+                      >
+                        <img
+                          src={plant.image}
+                          alt={plant.name}
+                          className="w-12 h-12 rounded-lg object-cover"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-text-light dark:text-text-dark truncate">
+                            {plant.name}
+                          </p>
+                          <p className="text-xs text-text-light/60 dark:text-text-dark/60">{plant.price}</p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : searchQuery.trim().length > 0 ? (
+                  <div className="p-4 text-center text-sm text-text-light/60 dark:text-text-dark/60">
+                    No plants found matching "{searchQuery}"
+                  </div>
+                ) : (
+                  <div className="p-4 text-center text-sm text-text-light/60 dark:text-text-dark/60">
+                    Start typing to search for plants...
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
