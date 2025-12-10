@@ -190,7 +190,8 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
             onClick={() => navigate('/')}
           >
             <h2 className="text-base sm:text-lg md:text-xl font-bold tracking-tight">
-              <span className="text-primary">pavandurganursery</span>
+              <span className="text-primary">pavandurga</span>
+              <span className="text-black dark:text-white">nursery</span>
               <span className="text-text-light dark:text-text-dark">.com</span>
             </h2>
           </div>
@@ -295,7 +296,8 @@ export const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({ showSearch = false
               onClick={() => navigate('/')}
             >
               <h2 className="text-base sm:text-lg font-bold tracking-tight">
-                <span className="text-primary">pavandurganursery</span>
+                <span className="text-primary">pavandurga</span>
+                <span className="text-black dark:text-white">nursery</span>
                 <span className="text-text-light dark:text-text-dark hidden sm:inline">.com</span>
               </h2>
             </div>
