@@ -82,58 +82,58 @@ export const Catalog: React.FC = () => {
             </div>
 
             {/* Plant Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4 sm:p-6 md:p-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 lg:gap-6 p-2 sm:p-4 md:p-6 lg:p-8">
               {paginatedPlants.length > 0 ? (
                 paginatedPlants.map((plant) => (
                   <div
                     key={plant.id}
                     onClick={() => navigate(`/product/${plant.id}`)}
-                    className="flex flex-col gap-4 rounded-xl bg-white dark:bg-gray-800/20 overflow-hidden shadow-sm hover:shadow-lg hover:scale-[1.03] transition-all duration-300 cursor-pointer"
+                    className="flex flex-col gap-2 sm:gap-3 lg:gap-4 rounded-lg sm:rounded-xl bg-white dark:bg-gray-800/20 overflow-hidden shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer"
                   >
                     <div
-                      className="w-full bg-center bg-no-repeat aspect-[4/3] bg-cover"
+                      className="w-full bg-center bg-no-repeat aspect-square sm:aspect-[4/3] bg-cover"
                       style={{ backgroundImage: `url("${plant.image}")` }}
                     />
-                    <div className="p-4 flex flex-col gap-4">
-                      <p className="text-[#0d1b12] dark:text-gray-100 text-lg font-bold leading-normal">
+                    <div className="p-2 sm:p-3 lg:p-4 flex flex-col gap-2 sm:gap-3 lg:gap-4">
+                      <p className="text-[#0d1b12] dark:text-gray-100 text-xs sm:text-sm lg:text-lg font-bold leading-tight sm:leading-normal line-clamp-2">
                         {plant.name}
                       </p>
-                      <div className="text-[#4c9a66] dark:text-gray-400 text-sm font-normal leading-normal flex flex-col gap-2">
-                        <div className="flex items-center gap-2">
-                          <span className="material-symbols-outlined text-base">light_mode</span>
-                          <span>{plant.light}</span>
+                      <div className="hidden sm:flex flex-col gap-1 sm:gap-2 text-[#4c9a66] dark:text-gray-400 text-xs sm:text-sm font-normal leading-normal">
+                        <div className="flex items-center gap-1 sm:gap-2">
+                          <span className="material-symbols-outlined text-xs sm:text-base">light_mode</span>
+                          <span className="truncate">{plant.light}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <span className="material-symbols-outlined text-base">water_drop</span>
-                          <span>{plant.water}</span>
+                        <div className="flex items-center gap-1 sm:gap-2">
+                          <span className="material-symbols-outlined text-xs sm:text-base">water_drop</span>
+                          <span className="truncate">{plant.water}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <span className="material-symbols-outlined text-base">eco</span>
-                          <span>{plant.feature}</span>
+                        <div className="flex items-center gap-1 sm:gap-2">
+                          <span className="material-symbols-outlined text-xs sm:text-base">eco</span>
+                          <span className="truncate">{plant.feature}</span>
                         </div>
                       </div>
-                      <p className="text-[#0d1b12] dark:text-gray-300 text-base font-semibold leading-normal">
+                      <p className="text-[#0d1b12] dark:text-gray-300 text-sm sm:text-base font-semibold leading-normal">
                         {plant.price}
                       </p>
-                      <div className="flex gap-2">
+                      <div className="flex gap-1 sm:gap-2">
                         <button
                           onClick={(e) => {
                             e.stopPropagation()
                             addToCart(plant)
                           }}
-                          className="flex-1 h-10 flex items-center justify-center gap-2 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors"
+                          className="flex-1 h-8 sm:h-9 lg:h-10 flex items-center justify-center gap-1 sm:gap-2 rounded-md sm:rounded-lg bg-primary text-white font-semibold text-xs sm:text-sm hover:bg-primary/90 transition-colors"
                         >
-                          <span className="material-symbols-outlined text-base">shopping_cart</span>
-                          Add to Cart
+                          <span className="material-symbols-outlined text-sm sm:text-base">shopping_cart</span>
+                          <span className="hidden sm:inline">Add to Cart</span>
                         </button>
                         <button
                           onClick={(e) => {
                             e.stopPropagation()
                             navigate(`/product/${plant.id}`)
                           }}
-                          className="px-4 h-10 flex items-center justify-center rounded-lg border-2 border-primary text-primary font-semibold text-sm hover:bg-primary/10 transition-colors"
+                          className="px-2 sm:px-4 h-8 sm:h-9 lg:h-10 flex items-center justify-center rounded-md sm:rounded-lg border-2 border-primary text-primary font-semibold text-xs sm:text-sm hover:bg-primary/10 transition-colors"
                         >
-                          <span className="material-symbols-outlined text-base">visibility</span>
+                          <span className="material-symbols-outlined text-sm sm:text-base">visibility</span>
                         </button>
                       </div>
                     </div>

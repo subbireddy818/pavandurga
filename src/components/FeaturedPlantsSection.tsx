@@ -67,40 +67,40 @@ export const FeaturedPlantsSection: React.FC = () => {
               Discover our handpicked selection of premium plants
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 lg:gap-6">
             {featuredPlants.map((plant) => (
               <div
                 key={plant.id}
-                className="flex flex-col gap-4 rounded-xl bg-white dark:bg-gray-800/20 overflow-hidden shadow-sm hover:shadow-lg hover:scale-[1.03] transition-all duration-300 cursor-pointer"
+                className="flex flex-col gap-2 sm:gap-3 lg:gap-4 rounded-lg sm:rounded-xl bg-white dark:bg-gray-800/20 overflow-hidden shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer"
               >
                 <div
-                  className="w-full bg-center bg-no-repeat aspect-[4/3] bg-cover"
+                  className="w-full bg-center bg-no-repeat aspect-square sm:aspect-[4/3] bg-cover"
                   style={{ backgroundImage: `url("${plant.image}")` }}
                   onClick={() => navigate(`/product/${plant.id}`)}
                 />
-                <div className="p-4 flex flex-col gap-4">
+                <div className="p-2 sm:p-3 lg:p-4 flex flex-col gap-2 sm:gap-3 lg:gap-4">
                   <p
-                    className="text-[#0d1b12] dark:text-gray-100 text-lg font-bold leading-normal cursor-pointer hover:text-primary transition-colors"
+                    className="text-[#0d1b12] dark:text-gray-100 text-xs sm:text-sm lg:text-lg font-bold leading-tight sm:leading-normal cursor-pointer hover:text-primary transition-colors line-clamp-2"
                     onClick={() => navigate(`/product/${plant.id}`)}
                   >
                     {plant.name}
                   </p>
-                  <p className="text-[#0d1b12] dark:text-gray-300 text-base font-semibold leading-normal">
+                  <p className="text-[#0d1b12] dark:text-gray-300 text-sm sm:text-base font-semibold leading-normal">
                     {plant.price}
                   </p>
                   
-                  {/* Quantity Selector */}
-                  <div className="flex items-center justify-center gap-3 border border-gray-300 dark:border-gray-600 rounded-lg p-1">
+                  {/* Quantity Selector - Hidden on mobile, shown on larger screens */}
+                  <div className="hidden sm:flex items-center justify-center gap-2 sm:gap-3 border border-gray-300 dark:border-gray-600 rounded-lg p-1">
                     <button
                       onClick={(e) => {
                         e.stopPropagation()
                         handleQuantityChange(plant.id, -1)
                       }}
-                      className="flex items-center justify-center w-8 h-8 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                     >
-                      <span className="material-symbols-outlined text-lg">remove</span>
+                      <span className="material-symbols-outlined text-sm sm:text-lg">remove</span>
                     </button>
-                    <span className="text-base font-semibold text-text-light dark:text-text-dark min-w-[30px] text-center">
+                    <span className="text-xs sm:text-base font-semibold text-text-light dark:text-text-dark min-w-[20px] sm:min-w-[30px] text-center">
                       {quantities[plant.id] || 1}
                     </span>
                     <button
@@ -108,9 +108,9 @@ export const FeaturedPlantsSection: React.FC = () => {
                         e.stopPropagation()
                         handleQuantityChange(plant.id, 1)
                       }}
-                      className="flex items-center justify-center w-8 h-8 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                     >
-                      <span className="material-symbols-outlined text-lg">add</span>
+                      <span className="material-symbols-outlined text-sm sm:text-lg">add</span>
                     </button>
                   </div>
 
@@ -120,10 +120,11 @@ export const FeaturedPlantsSection: React.FC = () => {
                       e.stopPropagation()
                       handleAddToCart(plant)
                     }}
-                    className="w-full h-10 flex items-center justify-center gap-2 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors"
+                    className="w-full h-8 sm:h-9 lg:h-10 flex items-center justify-center gap-1 sm:gap-2 rounded-md sm:rounded-lg bg-primary text-white font-semibold text-xs sm:text-sm hover:bg-primary/90 transition-colors"
                   >
-                    <span className="material-symbols-outlined text-base">shopping_cart</span>
-                    Add to Cart
+                    <span className="material-symbols-outlined text-sm sm:text-base">shopping_cart</span>
+                    <span className="hidden sm:inline">Add to Cart</span>
+                    <span className="sm:hidden">Add</span>
                   </button>
                 </div>
               </div>
